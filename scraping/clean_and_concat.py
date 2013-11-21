@@ -73,7 +73,7 @@ def get_filenames(read_path):
     
     return sort_nicely(filenames)
 
-def concatente_files(read_path, write_path):
+def concatente_files(read_path, write_path, dest_file_name):
     """Concatenate the .csv files, creating one big .csv file.
 
     Parameters
@@ -96,22 +96,28 @@ def concatente_files(read_path, write_path):
 
         df = pd.concat([df, pd.DataFrame.from_csv(file_path)], ignore_index=True)
 
-    new_file_path = join(write_path, 'concatenated_reviews.csv')
+    new_file_path = join(write_path, dest_file_name)
+    print '[INFO] Writing to %s' % new_file_path
     df.to_csv(new_file_path, index=False)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Post-process scraped data')
     
     group = parser.add_mutually_exclusive_group(required=True)
-    group.add_argument('-c', action='store_true', help='concatenate .csv files')
-    group.add_argument('-t', action='store_true', help='convert timestamps')
+    group.add_argument('-c', '--concat', action='store_true', help='concatenate .csv files')
+    group.add_argument('-t', '--timestamps', action='store_true', help='convert timestamps')
+
+    parser.add_argument('-f', '--filename', required=False, help='The name of the file to which '
+        'to write the result of file concatenation. Not required (and ignored if present) for -t/--timestamps.')
 
     parser.add_argument('source', help='Directory containing source .csv file(s)')
     parser.add_argument('dest', help='Directory to which to write produced .csv file(s)')
     args = parser.parse_args()
 
-    if args.c:
-        concatente_files(args.source, args.dest)
+    if args.concat:
+        if not args.filename:
+            parser.error("argument -c/--concat requires argument -f/--filename.")
+        concatente_files(args.source, args.dest, args.filename)
     else:
         convert_timestamps(args.source, args.dest)
 
