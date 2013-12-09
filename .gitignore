@@ -46,3 +46,7 @@ Thumbs.db
 # IPython #
 ###########
 .ipynb_checkpoints
+
+# Project-specific files #
+##########################
+local_config.py
