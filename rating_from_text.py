@@ -1,0 +1,1 @@
+def rating_fr
