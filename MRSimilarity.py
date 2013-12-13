@@ -14,7 +14,7 @@ class BeerSimilarities(MRJob):
         ]
 
     def line_mapper(self, _, line):
-        """Split reviews into their components are yield them keyed by username."""
+        """Split reviews into their components and yield them keyed by username."""
 
         data = line.split(' ')
         username = data[0]
