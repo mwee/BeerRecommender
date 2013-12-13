@@ -5,7 +5,7 @@ from itertools import combinations
 
 from scipy.stats.stats import pearsonr
 
-class UserSimilarities(MRJob):
+class MRUserSimilarity(MRJob):
     def steps(self):
         return [
             self.mr(mapper=self.line_mapper, reducer=self.beer_items_reducer),
@@ -72,4 +72,4 @@ class UserSimilarities(MRJob):
         yield (user_1_id, user_2_id), (similarities, n_common)
 
 if __name__ == '__main__':
-    UserSimilarities.run()
+    MRUserSimilarity.run()
