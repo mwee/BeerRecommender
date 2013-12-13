@@ -7,7 +7,6 @@ from scipy.stats.stats import pearsonr
 
 class BeerSimilarities(MRJob):
     def steps(self):
-        "the steps in the map-reduce process"
         return [
             self.mr(mapper=self.line_mapper, reducer=self.users_items_reducer),
             self.mr(mapper=self.pair_items_mapper, reducer=self.calc_sim_reducer)
