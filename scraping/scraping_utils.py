@@ -1,3 +1,7 @@
+"""
+# Common functionality that forms the backbone of the scrapers.
+"""
+
 import re
 import sys
 
@@ -11,7 +15,7 @@ BEER_URL_REGEX = re.compile(r'http://beeradvocate.com/beer/profile/(?P<brewery_i
 NEXT_TEXT_REGEX = re.compile('next &rsaquo;')
 
 # the number of URLs after which we'll write out the results to a file
-NUM_RESULTS_PER_FILE = 2000
+NUM_RESULTS_PER_FILE = 1000
 
 def read_lines(file_name):
     """Return a list of lines from the file with the given name."""
@@ -65,7 +69,7 @@ def get_next_link(soup, url):
     else:
         return BASE_URL + next_links[0]['href']
 
-def process_urls(urls, start, number_to_process, data_getter, filename_template):
+def process_urls(urls, start, number_to_process, data_getter, filename_templates):
     """Process the requested URLs, and save the scraped data to files.
 
     This is the main routine of the scrapers. It encapsulates the high-level
@@ -79,9 +83,9 @@ def process_urls(urls, start, number_to_process, data_getter, filename_template)
         The index in urls at which to start.
     number_to_process : int
         The number of URLs to process. -1 to process all from start to the end of the list.
-    data_getter : string (URL) => pandas.DataFrame
+    data_getter : string (URL) => pandas.DataFrame list
         The function used to process a URL. Should return a DataFrame representing a row of data.
-    filename_template : string
+    filename_templates : string list
         Template of the filename to use to save data. Should be a format string that can take
         one string  (i.e., one '%s').
 
@@ -95,8 +99,11 @@ def process_urls(urls, start, number_to_process, data_getter, filename_template)
     if number_to_process == -1:
         number_to_process = len(urls) - start
 
-    # the dataframe in which we'll accumulate data
-    df = pd.DataFrame()
+    # the dataframes in which we'll accumulate data
+    # df = pd.DataFrame()
+    dfs = []
+    for _ in filename_templates:
+        dfs.append(pd.DataFrame())
 
     for i, url in enumerate(urls[start:]):
         print_progress_bar(i + 1, number_to_process)
@@ -105,8 +112,13 @@ def process_urls(urls, start, number_to_process, data_getter, filename_template)
         if url[-1] != '/':
             url += '/'
 
-        # get the data for the current URL and add it to our dataframe
-        df = df.append(data_getter(url), ignore_index=True)
+        # get the data for the current URL and add it to our dataframes
+        # if not new_data.empty:
+        #     df = df.append(new_data, ignore_index=True)
+        new_data = data_getter(url)
+        for j, frame in enumerate(new_data):
+            if not frame.empty:
+                dfs[j] = dfs[j].append(frame, ignore_index=True)
 
         # if we've scraped enough URLs, write out to a file and reset the dataframe
         if (i + 1) % NUM_RESULTS_PER_FILE == 0:
@@ -115,16 +127,27 @@ def process_urls(urls, start, number_to_process, data_getter, filename_template)
             file_number_str = '%02d' % file_number
 
             log('Writing to file %s' % file_number_str)
-            df.to_csv(filename_template % file_number_str, encoding='utf-8', index=False)
-            df = pd.DataFrame()
 
-        # stop if we've scraped the desired number of beers
+            # df.to_csv(filename_template % file_number_str, encoding='utf-8', index=False)
+            # df = pd.DataFrame()
+            for i, template in enumerate(filename_templates):
+                dfs[i].to_csv(template % file_number_str, encoding='utf-8', index=False)
+                dfs[i] = pd.DataFrame()
+
+        # stop if we've processed the desired number of urls
         if i == number_to_process - 1:
             break
 
-    if not df.empty:
-        log('Writing remaining data to one last file')
-        df.to_csv(filename_template % 'last', encoding='utf-8', index=False)
+    # if not df.empty:
+    #     log('Writing remaining data to one last file')
+    #     df.to_csv(filename_template % 'last', encoding='utf-8', index=False)
+    for i, template in enumerate(filename_templates):
+        if not dfs[i].empty:
+            log('Writing remaining data to one last file (%s)' % (template % 'last'))
+            dfs[i].to_csv(template % 'last', encoding='utf-8', index=False)
+        else:
+            print 'EMPTY'
+            print dfs[i]
 
     # print out progress bar just to make sure that it's displayed after the function returns
     print_progress_bar(number_to_process, number_to_process)
