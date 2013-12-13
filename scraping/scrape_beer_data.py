@@ -1,3 +1,7 @@
+"""
+# Scrape beer data.
+"""
+
 import argparse
 import re
 
@@ -19,12 +23,12 @@ NUM_REVIEWS_REGEX = re.compile(r'^Reviews: (?P<num_reviews>\d+)$')
 RAVG_REGEX = re.compile(r'^rAvg: (?P<r_avg>\d+(?:\.\d+)?)$')
 PDEV_REGEX = re.compile(r'^pDev: (?P<p_dev>\d+(?:\.\d+)?)\%$')
 
-CSV_FILE_NAME_TEMPLATE = 'beers/beers_%s.csv'
+BEER_CSV_FILE_NAME_TEMPLATE = 'beers_new/beers_%s.csv'
 
 # file containing beer URLs to be scraped
 BEER_URLS_FILE = 'unique_beer_urls.txt'
 
-def get_beer_info(beer_url):
+def get_beer_info(beer_url, soup=None):
     # init a dict with default values for all attributes
     data_dict = {
         'brewery_id': None,
@@ -44,7 +48,8 @@ def get_beer_info(beer_url):
     }
 
     # grab the main content div from the page
-    soup = BeautifulSoup(requests.get(beer_url).text)
+    if not soup:
+        soup = BeautifulSoup(requests.get(beer_url).text)
     content_div = soup.find('div', attrs={'id': 'baContent'})
 
     # get brewery and beer IDs from the URL
@@ -64,7 +69,7 @@ def get_beer_info(beer_url):
         data_dict['alias_name'] = alias_match.group('alias_name')
         log('Alias: %s; %s/%s -> %s/%s' % (beer_url, brewery_id, beer_id, brewery_id, data_dict['alias_id']))
 
-        return pd.DataFrame({k: [data_dict[k]] for k in data_dict.keys()})
+        return [pd.DataFrame({k: [data_dict[k]] for k in data_dict.keys()})]
     
     # find an <a> tag that contains the brewery name
     brewery_url_regex = re.compile(r'^/beer/profile/%s$' % brewery_id)
@@ -118,7 +123,7 @@ def get_beer_info(beer_url):
     else:
         log('Error finding p_dev for URL %s' % beer_url)
 
-    return pd.DataFrame({k: [data_dict[k]] for k in data_dict.keys()})
+    return [pd.DataFrame({k: [data_dict[k]] for k in data_dict.keys()})]
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Scrape beer data')
@@ -136,5 +141,5 @@ if __name__ == '__main__':
         num_string = 'all (%s)' % (len(beer_urls) - args.start)
 
     log('Processing URLs. Start index: %s; Number to process: %s' % (args.start, num_string))
-    process_urls(beer_urls, args.start, args.num, get_beer_info, CSV_FILE_NAME_TEMPLATE)
+    process_urls(beer_urls, args.start, args.num, get_beer_info, [BEER_CSV_FILE_NAME_TEMPLATE])
 
