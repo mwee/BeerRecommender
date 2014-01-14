@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>CS109 Beer Recommender</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom CSS for the 'One Page Wonder' Template -->
+    <link href="css/one-page-wonder.css" rel="stylesheet">
+
+    <!-- JavaScript -->
+    <script src="js/jquery-1.10.2.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/smoothscroll.js"></script>
+  </head>
+
+  <body >
+
+    <nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+      <div class="container">
+        <div class="navbar-header" style="height:20px">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html" style="padding-top:10px"> <img src="http://saintjameswell.com/wp-content/uploads/2013/02/5Beer-icon.png" height="30"> CS109 Beer Recommender </a> 
+
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse" id="main-nav">
+          <ul class="nav navbar-nav">
+            <li><a href="#beer-beer">Beer-Beer</a></li>
+            <li><a href="#user-user">User-User</a></li>
+            <li><a href="#textual">Text Analysis</a></li>
+            <li><a href="./BeerRecommender.ipynb">Notebook <span class="glyphicon glyphicon-book"></span></a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container -->
+    </nav>
+
+    <div class="header-image">
+
+      <div class="headline">
+  <!--       <div class="jumbotron">
+          <h1>Beer Recommender</h1>
+          <h2>Will Knock Your Socks Off</h2>
+        </div> -->
+        <div>
+          <h2 style="color:whitesmoke"> <a href="http://www.youtube.com/watch?v=a10RnLXG4B8" style="color:whitesmoke" target="_blank"> CS109 Beer Recommender </a> </h2>
+          <iframe id="vid" src="https://player.vimeo.com/video/81781523?portrait=0" style="width:50%; " frameborder="1" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+          <h3 style="color:whitesmoke"> Michael Traver, Marcin Kostecki, Michael Wee, & Lucas Lin</h3>          
+
+        </div>
+        
+      </div>
+<script>
+
+  $(function(){
+    $("#vid").height($("#vid").width()*.60)
+    $('a').smoothScroll({speed: 200});
+  });
+  $( window ).resize(function() {
+    $("#vid").height($("#vid").width()*.60)
+  });
+</script>
+
+    </div><!-- /header-image -->
+
+    <div class="container">
+
+      <!-- START THE FEATURETTES -->
+
+      <hr class="featurette-divider">
+
+      <div class="featurette">
+        <img class="featurette-image img-circle img-responsive pull-right" height='500px' width='500px' src="http://1.bp.blogspot.com/_P2El7kxGi4g/TSHpx9K58gI/AAAAAAAAApQ/6jKfvi6hFJI/s1600/SAM_1426a.jpg">
+        <!-- <img class="featurette-image img-circle img-responsive pull-right" height='500px' width='500px' src="http://brewingsomefun.com/wp-content/uploads/2010/08/IMG_6377.jpg"> -->
+        <h2 class="featurette-heading"> When your goal is not simply to get drunk... <br><span class="text-muted">Natty Ice might not cut it.</span></h2>
+        <p class="lead">Maybe you love a "hop-bomb", or perhaps you prefer an ale with citrus undertones, or maybe you have no idea what these things mean – you just know the beers you enjoyed and the ones you didn't. Regardless, our recommender can help you find new favorites.</p>
+
+
+      </div>
+
+
+
+        <hr class="featurette-divider">
+
+        <div class="featurette">
+        <img class="featurette-image img-circle img-responsive pull-left" height='500px' width='500px' src="http://www.merchantsfinewine.com/wp-content/uploads/2013/06/beeradvocate-logo.png">
+        <!-- <img class="featurette-image img-circle img-responsive pull-right" height='500px' width='500px' src="http://brewingsomefun.com/wp-content/uploads/2010/08/IMG_6377.jpg"> -->
+        <h2 class="featurette-heading"> Getting Data <span class="text-muted">– because not even Mike can drink that much</span></h2>
+        <p class="lead">
+          We chose to use <a href="http://beeradvocate.com" target="_blank">BeerAdvocate.com</a> to gather our review data because of the large volume of reviews on it. In order to use the reviews data, we created a program to gather all the review data we could find from the site.
+ <!--          <br> 
+          <a href="./data.html">Read More <span class="glyphicon glyphicon-circle-arrow-right"></span></a> -->
+        </p>
+
+
+        <button type="button" class="btn btn-success" data-toggle="collapse" data-target="#demo">
+          Read More
+        </button>
+
+        <!-- Collapse -->
+        <!-- *************************************************************************************************************************************** -->
+        <div id="demo" class="collapse" style="background-color:whitesmoke; padding-left: 50px; padding-right: 50px; padding-bottom:50px">
+          
+          <hr class="featurette-divider ">
+          <div class="featurette">
+                <img class="featurette-image img-responsive pull-right" height='500px' width='500px' src="./img/review.png">
+                <!-- <img class="featurette-image img-circle img-responsive pull-right" height='500px' width='500px' src="http://brewingsomefun.com/wp-content/uploads/2010/08/IMG_6377.jpg"> -->
+                <h2 class="featurette-heading"> Review Format <!-- <span class="text-muted">Natty Ice might not cut it.</span> --></h2>
+                <p class="lead">
+                  Reviews on <a href="http://beeradvocate.com" target="_blank">BeerAdvocate.com</a> follow a consistent format. They each have five numerical aspects – <em> look, smell, taste, feel,</em> and <em>overall</em>. Each is rated from 1 to 5 in 0.25 increments. Reviews also have a written portion where a user can input a text review of the beer.
+                </p>
+          </div>
+
+          <hr class="featurette-divider dark-divider">
+          <div class="featurette">
+                <!-- <img class="featurette-image img-responsive pull-right" height='500px' width='500px' src="./img/review.png"> -->
+                <!-- <img class="featurette-image img-circle img-responsive pull-right" height='500px' width='500px' src="http://brewingsomefun.com/wp-content/uploads/2010/08/IMG_6377.jpg"> -->
+                <h2 class="featurette-heading"> Collecting the Data<br> <span class="text-muted">Programatically aggregating reviews</span></h2>
+                <p class="lead">
+                  We ran a Python script using the <a href="http://docs.python-requests.org/en/latest/index.html"> Requests </a> and <a href="http://www.crummy.com/software/BeautifulSoup/"> Beautiful Soup </a> modules to scrape the reviews from the site. The scraping was a tedious process, requiring manual input of some directory URLs. In all the job took 4 parallel processes  running overnight over 15 hours to finish. The data was written into a CSV file for ease of use. It was saved periodically to mitigate risk of corruption.
+                </p>
+                <p class="lead">
+                  The data itself was quite large, measuring <strong>1.63 GB</strong>. Of this data, there were <strong>1,829,749 reviews</strong> with full text and aspect ratings. There were about just as many incomplete reviews in which users did not fill in all fields – we did not use these. There were a total of <strong>37,232 users</strong> and <strong>82,829 beers</strong>.
+                </p>
+          </div>
+
+          <br>
+
+          <!-- <button type="button" class="btn btn-danger"> <span class="glyphicon glyphicon-collapse-up lead"></span></button> -->
+          <!-- <a style="text-align:center; margin-bottom:0px;" class="lead"> <br>Hide <br> <span class="glyphicon glyphicon-collapse-up"></span></a> -->
+        </div>
+        <!-- ************************************************************************************************************************************** -->
+
+
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <hr class="featurette-divider">
+
+      <div class="featurette">
+        <img class="featurette-image img-circle img-responsive pull-right" height='500px' width='500px' src="http://farm8.staticflickr.com/7068/6960103135_5ce6fa9f9a_z.jpg">
+
+        <h2 class="featurette-heading">Behind the Magic <br> <span class="text-muted">How do we do it?</span></h2>
+        <p class="lead">
+          We try to create a better beer recommender by using three main concepts:
+        </p>
+
+        <h3>Beer-Beer Similarity</h3>
+        <p class="lead">
+          We look at which beers you like and find others that are similar.
+        </p>
+
+        <h3>User-User Similarity</h3>
+        <p class="lead">
+          We look at users who seem to have tastes similar to yours and seewhat other beers they liked.
+        </p>
+
+        <h3>Text Analysis</h3>
+        <p class="lead"><em>Aspect</em><br>
+          We look at sentences in your review and associate them with beer aspects such as taste, look, and feel.
+        </p>
+        <p class="lead"><em>Sentiment</em><br>
+          We look at the text of reviews from beers you liked and find particular words that seem to be indicative of your taste.
+        </p>
+
+
+
+  
+      </div>
+
+      <hr class="featurette-divider" id="beer-beer">
+
+      <div class="featurette">
+        <img class="featurette-image  img-responsive pull-left" width='500px' src="http://guyism.com/wp-content/uploads/2012/03/ipa-belgian-pale-ale.jpg">
+        <h2 class="featurette-heading">Beer-Beer Similarity <br><span class="text-muted">You'll probably like a beer like a beer you like.</span></h2>
+        <p class="lead">
+          We used methods similar to those used in <a href="http://nbviewer.ipython.org/github/cs109/content/blob/master/HW4.ipynb" target="_blank">Homework 4</a> to create a database of "Item-Item" similarities using Pearson's <em>r</em> correlation coefficient as the similarity measure. However, because of the large scale of the data (1,829,749 reviews, 1.63GB) we were analyzing, it was infeasible to process the similarities on a single machine. We parallelized the similarity calculation into MapReduce which we computed on Amazon EC2 Hadoop clusters. We also used <a href="http://en.wikipedia.org/wiki/Collaborative_filtering" target="_blank"> collaborative filtering</a> (CF) to be able to suggest similar "neighbors" of a beer the user has rated by aspect and predicted what the user would rate them according to each aspect. 
+        </p>
+
+      </div>
+
+
+
+
+      <hr class="featurette-divider" id="user-user">
+
+      <div class="featurette">
+        <img class="featurette-image img-circle img-responsive pull-right" height='500px' width='500px' src="http://25.media.tumblr.com/342c8addd05ed4fe0e47e7720011078f/tumblr_mk2o6v6FjC1qbaleqo1_1280.jpg">
+        <!-- <img class="featurette-image img-circle img-responsive pull-right" height='500px' width='500px' src="http://brewingsomefun.com/wp-content/uploads/2010/08/IMG_6377.jpg"> -->
+        <h2 class="featurette-heading"> User-User Similarity <br><span class="text-muted">If the other guy is like you, you'll like the beer he likes too.</span></h2>
+        <p class="lead">
+          It makes sense that if a user shares your tastes, a beer he likes is probably one you will also enjoy. You will have high similarity to another user if you both rated the similar beers in the similar ways. 
+        </p>
+        <p class="lead">
+          We constructed a "User-User" similarity Database using MapReduce on Amazon EC2 and use collaborative filtering to suggest beers that similar users liked and predict how the user would rate them on each aspect.
+        </p>
+
+
+      </div>
+
+
+
+      <hr class="featurette-divider" id="textual">
+
+      <div class="featurette">
+        <img class="featurette-image  img-responsive pull-left" width="400px"src="./img/word_cloud.png">
+        <h2 class="featurette-heading">Text Analysis </h2>
+        <h4 class="text-muted">
+          Every beer you rate,
+          <br>
+          Every brew you hate,
+          <br>
+          Every review you write,
+          <br>
+          Every beer you like,
+          <br>
+          We'll be <a href="http://www.youtube.com/watch?v=OMOGaugKpzs" target="_blank" style="color:#999999;"> watching you.</a>
+        </h4>
+
+       <h3>Aspect</h3>
+        <p class="lead">
+          We analyzed each sentence in a textual review in order to identify which aspect the sentence talks about. This allows us to measure the sentiment in specific words in relation to an aspect rating. We could also use this to correlate and analyze sentences with more advanced aspects that aren't summed up in the Look, Taste, Feel, Smell categories.
+        </p>
+
+        <p class="lead">
+          We achieved this by modelling two parameter vectors that respectively encode words that discuss an aspect and words that discuss the associated sentiment. We can use these parameter vectors to calculate an indivdual probability of that a sentence discusses a particular aspect given the ratings as well as the probability for an entire review and the entire corpus. We model the two parameter vectors and latent aspect assignments by maximizing the log-likelihood probability of the corpus. We optimize this by coordinate ascent on the parameter vectors and alternately optimize the most likely latent aspect by calculating probabilities and the most likely parameter vectors through gradient ascent.
+        </p>
+
+
+        <h3>Sentiment</h3>
+        <p class="lead">
+          We predict how a user would rate a particular beer by analyzing the text of the reviews the user has posted as well as the textual reviews posted by other users of the beer. We predict this by looking at the words other users reviewed the beer with and consider how the user associates these words with ratings in their own reviews. 
+        </p>
+        <p class="lead">
+          In more detail, from the aspect parameter vectors we modeled we can get the probabilities that the particular user associates a word to a particular aspect and rating. For every aspect, we look at every review of the particular beer and get the sentence that is most likely to be about that aspect. We then store, for the particular user, the most likely rating the word implies for the aspect given the user's reviews and the probability that the user associates the word with the aspect. We then take a weighted average of how the user would give ratings in the existing reviews weighted by how strongly the user associates the word with the aspect to predict how the user would rate that aspect of the beer.        
+        </p>
+
+
+
+      </div>
+
+
+      <hr class="featurette-divider" id="inspiration">
+
+      <div class="featurette">
+        <img class="featurette-image img-circle img-responsive pull-right" width='300px' src="http://fridayfunfact.files.wordpress.com/2011/07/lightbulb-beer.jpg
+">
+        <h2 class="featurette-heading">Inspiration <br><span class="text-muted">You'll probably like a beer like a beer you like.</span></h2>
+        <p class="lead">
+          We used methods similar to those used in <a href="http://nbviewer.ipython.org/github/cs109/content/blob/master/HW4.ipynb" target="_blank">Homework 4</a> to create a database of "Item-Item" similarities. We also used <a href="http://en.wikipedia.org/wiki/Collaborative_filtering" target="_blank"> collaborative filtering</a> (CF) to be able to suggest similar "neighbors" of a beer.
+        </p>
+      </div>
+
+      <!-- /END THE FEATURETTES -->
+
+      <hr>
+
+      <!-- FOOTER -->
+      <footer>
+        <p>Copyright &copy; DeLaney & Bros 2013</p>
+      </footer>
+      <!-- /END OF FOOTER -->
+
+    </div><!-- /container -->
+
+
+  </body>
+
+</html>

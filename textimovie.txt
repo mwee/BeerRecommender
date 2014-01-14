@@ -1,0 +1,10 @@
+– "Item-Item" similarities
+– Parallel processing to handle big data
+– Suggest similar "neighbors" of a beer the user has rated by aspect
+– Predict user rating for each aspect
+
+
+– "User-User" similarities
+– Parallel processing to handle big data
+– suggest beers that similar users liked
+– predict how the user would rate them on each aspect

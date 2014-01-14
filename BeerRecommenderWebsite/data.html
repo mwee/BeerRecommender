@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>CS109 Beer Recommender</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom CSS for the 'One Page Wonder' Template -->
+    <link href="css/one-page-wonder.css" rel="stylesheet">
+
+    <!-- JavaScript -->
+    <script src="js/jquery-1.10.2.js"></script>
+    <script src="js/bootstrap.js"></script>
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.php">CS109 Beer Recommender</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="#about">Beer-Beer</a></li>
+            <li><a href="#services">User-User</a></li>
+            <li><a href="#contact">Text Sentiment</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container -->
+    </nav>
+
+    <div class="container">
+
+      <!-- START THE FEATURETTES -->
+
+      <hr class="featurette-divider">
+   <!--    <br>
+      <br>
+      <br>
+ -->
+      <div class="featurette" id="about">
+        <img class="featurette-image img-responsive pull-right" height='500px' width='500px' src="./img/review.png">
+        <!-- <img class="featurette-image img-circle img-responsive pull-right" height='500px' width='500px' src="http://brewingsomefun.com/wp-content/uploads/2010/08/IMG_6377.jpg"> -->
+        <h2 class="featurette-heading"> Review Format <!-- <span class="text-muted">Natty Ice might not cut it.</span> --></h2>
+        <p class="lead">Maybe you love a "hop-bomb", or perhaps you prefer an ale with citrus undertones, or maybe you have no idea what these things mean – you just know the beers you enjoyed and the ones you didn't. Regardless, our recommender can help you find new favorites.</p>
+
+
+      </div>
+
+      <button type="button" class="btn btn-danger" data-toggle="collapse" data-target="#demo">
+  simple collapsible
+</button>
+
+<div id="demo" class="collapse in" style="background-color:whitesmoke; padding-left: 50px; padding-right: 20px">
+	<hr class="featurette-divider">
+	<div class="featurette" id="about">
+        <img class="featurette-image img-responsive pull-right" height='500px' width='500px' src="./img/review.png">
+        <!-- <img class="featurette-image img-circle img-responsive pull-right" height='500px' width='500px' src="http://brewingsomefun.com/wp-content/uploads/2010/08/IMG_6377.jpg"> -->
+        <h2 class="featurette-heading"> Review Format <!-- <span class="text-muted">Natty Ice might not cut it.</span> --></h2>
+        <p class="lead">Maybe you love a "hop-bomb", or perhaps you prefer an ale with citrus undertones, or maybe you have no idea what these things mean – you just know the beers you enjoyed and the ones you didn't. Regardless, our recommender can help you find new favorites.</p>
+
+
+      </div>
+</div>
+
+
+
+      <hr class="featurette-divider">
+
+      <div class="featurette" id="about">
+        <img class="featurette-image img-circle img-responsive pull-left" height='500px' width='500px' src="http://www.merchantsfinewine.com/wp-content/uploads/2013/06/beeradvocate-logo.png">
+        <!-- <img class="featurette-image img-circle img-responsive pull-right" height='500px' width='500px' src="http://brewingsomefun.com/wp-content/uploads/2010/08/IMG_6377.jpg"> -->
+        <h2 class="featurette-heading"> Getting Data <span class="text-muted">– because not even Mike can drink that much</span></h2>
+        <p class="lead">
+          We chose to use <a href="http://beeradvocate.com" target="_blank">BeerAdvocate.com</a> to gather our review data because of the large volume of reviews on it. In order to use the reviews data, we created a program to gather all the review data we could find from the site.
+          <br> 
+          <a href="./data.html">Read More <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+        </p>
+
+
+      </div>
+
+
+
+
+
+      <hr class="featurette-divider">
+
+      <div class="featurette" id="services">
+        <img class="featurette-image img-circle img-responsive pull-right" height='500px' width='500px' src="http://farm8.staticflickr.com/7068/6960103135_5ce6fa9f9a_z.jpg">
+
+        <h2 class="featurette-heading">Behind the Magic <span class="text-muted">How do we do it?</span></h2>
+        <p class="lead">
+          We try to create a better beer recommender by using three main concepts:
+        </p>
+
+        <h3>Beer-Beer Similarity</h3>
+        <p class="lead">
+          We look at which beers you like and find others that are similar.
+        </p>
+
+        <h3>User-User Similarity</h3>
+        <p class="lead">
+          We look at users who seem to have tastes similar to yours and seewhat other beers they liked.
+        </p>
+
+        <h3>Text-based Sentiment Analysis</h3>
+        <p class="lead">
+          We look at the text of reviews from beers you liked and find particular words that seem to be indicative of your taste.
+        </p>
+
+  
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="featurette" id="contact">
+        <img class="featurette-image  img-responsive pull-left" width='500px' src="http://guyism.com/wp-content/uploads/2012/03/ipa-belgian-pale-ale.jpg">
+        <h2 class="featurette-heading">Beer-Beer Similarity <span class="text-muted">You'll probably like a beer like a beer you like.</span></h2>
+        <p class="lead">
+          We used methods similar to those used in <a href="http://nbviewer.ipython.org/github/cs109/content/blob/master/HW4.ipynb" target="_blank">Homework 4</a> to create a database of "Item-Item" similarities. We also used <a href="http://en.wikipedia.org/wiki/Collaborative_filtering" target="_blank"> collaborative filtering</a> (CF) to be able to suggest similar "neighbors" of a beer.
+        </p>
+      </div>
+
+      <!-- /END THE FEATURETTES -->
+
+      <hr>
+
+      <!-- FOOTER -->
+      <footer>
+        <p>Copyright &copy; DeLaney & Bros 2013</p>
+      </footer>
+      <!-- /END OF FOOTER -->
+
+    </div><!-- /container -->
+
+
+  </body>
+
+</html>
